@@ -1,28 +1,82 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Uncle Conny's Mixtape"/>
+  <div
+    id="app"
+    :style="{ backgroundImage: `url( ${playlists[currentList].bgImg})` }"
+  >
+    <NameNav
+      @setPlaylist="setPlaylist"
+      :playlists="playlists"
+      msg="Uncle Conny's Mixtape"
+    />
+    <Infobox />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NameNav from "./components/NameNav.vue";
+import Infobox from "./components/InfoBox.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+	NameNav,
+	Infobox
+  },
+  data() {
+    return {
+      isPlaying: false,
+      currentList: "0",
+      currentTrack: 0,
+      playlists: [
+        {
+          bgImg: require("./assets/images/home-bg.jpg"),
+		},
+		{
+          id: "bruce_springsteen",
+          title: "Bruce Springsteen",
+          bgImg: require("./assets/images/bruce-springsteen.jpg"),
+          tracks: "bruce-springsteen.json"
+        },
+        {
+          id: "mariah_carey",
+          bgImg: require("./assets/images/mariah-carey.jpg"),
+          title: "Mariah Carey"
+        },
+        {
+          id: "andrew_mcmahon",
+          bgImg: require("./assets/images/andrew-mcmahon.jpg"),
+          title: "Andrew McMahon"
+        }
+      ]
+    };
+  },
+  methods: {
+    setPlaylist(id) {
+      this.currentList = id;
+    }
   }
-}
+};
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  overflow: hidden;
+  font-family: gelo, serif;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 </style>
