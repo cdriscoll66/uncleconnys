@@ -1,20 +1,23 @@
 <template>
   <div class="infobox">
-    <div v-if="myJson">{{ myJson }}</div>
+    <h1>{{ currentListName }}</h1>
   </div>
 </template>
 
 <script>
-import json from "../assets/playlists/bruce_springsteen.json";
-
 export default {
   name: "Infobox",
-  props: {},
+  props: {
+    currentListName: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      myJson: json
+
     };
-  }
+  },
 };
 </script>
 
